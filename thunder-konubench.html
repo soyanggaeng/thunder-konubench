@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thunder-KoNUBench · ACL 2026</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+/>
+<style>
+  /* ACL 2026 팔레트
+     - primary blue (배경 띠 색): #1E4A8C 계열
+     - accent red  (로고 빨강):   #E63946 계열
+  */
+  :root {
+    --acl-blue: #1B4A8B;
+    --acl-blue-deep: #133869;
+    --acl-blue-soft: #EAF1FB;
+    --acl-red: #E63946;
+    --acl-red-deep: #C72C3B;
+    --ink: #111827;
+    --ink-soft: #4B5563;
+    --ink-muted: #6B7280;
+    --line: rgba(27, 74, 139, 0.12);
+  }
+
+  * {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    box-sizing: border-box;
+  }
+  body {
+    /* ACL 2026 배경의 파란색을 메인으로 한 부드러운 그라데이션 */
+    background: linear-gradient(180deg, #FDFEFF 0%, var(--acl-blue-soft) 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    color: var(--ink);
+  }
+  .wrap {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* 상단 ACL 2026 배너 — 로고 색감(파란 배경 + 빨간 띠) 차용 */
+  .acl-banner {
+    width: 100%;
+    background: var(--acl-blue);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 20px rgba(27, 74, 139, 0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  /* 배너 우측의 ACL 로고 스타일 빨간 띠 장식 */
+  .acl-banner::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    width: 90px;
+    height: 6px;
+    background: var(--acl-red);
+    transform: translateY(-12px);
+    box-shadow: 0 14px 0 var(--acl-red);
+  }
+  .acl-banner-text {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    text-align: left;
+    z-index: 1;
+  }
+  .acl-banner-text .top {
+    font-size: 18px;
+  }
+  .acl-banner-text .sub {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.85;
+    margin-top: 2px;
+  }
+
+  /* 세션 태그 — ACL 빨강 채택 */
+  .session-tag {
+    background-color: var(--acl-red);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .main-title {
+    color: var(--ink);
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 14px;
+    word-break: keep-all;
+  }
+  .authors {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .affiliation {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+  .affiliation a {
+    color: var(--acl-blue);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .affiliation a:hover { text-decoration: underline; }
+
+  /* 발표 일정 박스 */
+  .schedule {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--acl-blue);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 26px;
+    text-align: left;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .schedule strong {
+    color: var(--acl-blue);
+    font-weight: 700;
+  }
+
+  .resource-buttons {
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .bigbutton {
+    width: 100%;
+    height: 58px;
+    border-radius: 14px;
+    background-color: white;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(27, 74, 139, 0.10);
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+  }
+  .bigbutton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(27, 74, 139, 0.18);
+  }
+  /* Paper: 파란 아웃라인 버튼 */
+  .paper-btn {
+    border-color: var(--acl-blue);
+    color: var(--acl-blue);
+  }
+  /* Dataset: ACL 레드 채움 — 강조 액션 */
+  .data-btn {
+    background-color: var(--acl-red);
+    color: #fff !important;
+    border-color: var(--acl-red);
+  }
+  .data-btn:hover { background-color: var(--acl-red-deep); border-color: var(--acl-red-deep); }
+  /* GitHub: 파란 채움 보조 액션 */
+  .code-btn {
+    background-color: var(--acl-blue);
+    color: #fff !important;
+    border-color: var(--acl-blue);
+  }
+  .code-btn:hover { background-color: var(--acl-blue-deep); border-color: var(--acl-blue-deep); }
+
+  .code-note {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    margin-top: -4px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  .contact-section {
+    width: 100%;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(6px);
+    border-radius: 18px;
+    border: 1px solid var(--line);
+  }
+  .presenter-label {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--acl-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .presenter-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .email {
+    font-size: 14px;
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+  .email:hover { color: var(--acl-blue); }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 11px;
+    color: #b8c0cc;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ACL 2026 상단 배너 (로고 색 차용) -->
+    <div class="acl-banner" aria-label="ACL 2026 San Diego, July 2–7">
+      <div class="acl-banner-text">
+        <div class="top">ACL 2026</div>
+        <div class="sub">SAN DIEGO · JULY 2–7</div>
+      </div>
+    </div>
+
+    <span class="session-tag">Session 8 · Oral / Posters / Demos D</span>
+
+    <h1 class="main-title">
+      Thunder-KoNUBench: A Corpus-Aligned Benchmark for Korean Negation Understanding
+    </h1>
+
+    <p class="authors">
+      <strong>Sungmok Jung</strong>, Yeonkyoung So, Joonhak Lee,<br />
+      Sangho Kim, Yelim Ahn, Jaejin Lee
+    </p>
+    <p class="affiliation">
+      <a href="https://thunder.ac.kr" target="_blank" rel="noopener">thunder.ac.kr</a>
+    </p>
+
+    <!-- 발표 일정 -->
+    <div class="schedule">
+      <strong>📍 Presentation</strong><br />
+      Mon, July 6 · 9:00–10:30<br />
+      Session 8: Oral/Posters/Demos D
+    </div>
+
+    <div class="resource-buttons">
+      <a class="bigbutton paper-btn" target="_blank" rel="noopener"
+         href="https://arxiv.org/abs/2601.04693">
+        📄 Read Paper (arXiv)
+      </a>
+      <a class="bigbutton data-btn" target="_blank" rel="noopener"
+         href="https://huggingface.co/datasets/thunder-research-group/SNU_Thunder-KoNUBench">
+        🤗 Get Dataset (Hugging Face)
+      </a>
+      <a class="bigbutton code-btn" target="_blank" rel="noopener"
+         href="https://github.com/mcrl/Thunder-KoNUBench">
+        💻 View Code (GitHub)
+      </a>
+      <p class="code-note">
+        Integrates the benchmark as a task into lm-evaluation-harness;
+        also includes SFT and general training/evaluation code.
+      </p>
+    </div>
+
+    <div class="contact-section">
+      <span class="presenter-label">Presenter</span>
+      <div class="presenter-name">Sungmok Jung (정성목)</div>
+      <a href="mailto:sungmok@thunder.ac.kr" class="email">sungmok@thunder.ac.kr</a>
+    </div>
+
+    <div class="footer">© 2026 Thunder-KoNUBench. All rights reserved.</div>
+  </div>
+</body>
+</html>
